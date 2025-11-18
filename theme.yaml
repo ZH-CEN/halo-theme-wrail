@@ -2,21 +2,21 @@
 apiVersion: theme.halo.run/v1alpha1
 kind: Theme
 metadata:
-  name: halo-theme-chirpy
+  name: halo-theme-wrail
   annotations:
     # Add supports for Halo App Store
     # https://halo.run/store/apps/app-vGuQB
-    "store.halo.run/app-id": "app-vGuQB"
+    # "store.halo.run/app-id": "app-vGuQB"
 spec:
-  displayName: Chirpy
+  displayName: Wrail
   author:
-    name: AirboZH
-    website: https://airbozh.cn
+    name: ZCHEN
+    website: https://zchens.cn
   description: A minimal, responsive and feature-rich Halo theme for technical writing.
   logo: https://chirpy-img.netlify.app/commons/avatar.jpg
-  website: https://github.com/AirboZH/halo-theme-chirpy
-  repo: https://github.com/AirboZH/halo-theme-chirpy.git
-  settingName: "halo-theme-chirpy-setting"
-  configMapName: "halo-theme-chirpy-configMap"
-  version: 1.4.9
+  website: https://github.com/ZH-CEN/halo-theme-wrail
+  repo: https://github.com/ZH-CEN/halo-theme-wrail.git
+  settingName: "halo-theme-wrail-setting"
+  configMapName: "halo-theme-wrail-configMap"
+  version: 1.0.0
   require: ">=2.0.0"
