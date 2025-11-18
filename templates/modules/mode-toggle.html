@@ -12,6 +12,14 @@
         return "data-mode";
       }
 
+      static get COLOR_SCHEME_ATTR() {
+        return "data-color-scheme";
+      }
+
+      static get COLOR_SCHEME_AUTO() {
+        return "auto";
+      }
+
       static get DARK_MODE() {
         return "dark";
       }
@@ -73,6 +81,36 @@
         return window.matchMedia("(prefers-color-scheme: dark)");
       }
 
+      updateColorScheme(mode) {
+        const html = document.documentElement;
+        const classesToRemove = [
+          "color-scheme-auto",
+          "color-scheme-dark",
+          "color-scheme-light",
+          ModeToggle.DARK_MODE,
+          ModeToggle.LIGHT_MODE
+        ];
+
+        html.classList.remove(...classesToRemove);
+
+        if (mode === ModeToggle.DARK_MODE) {
+          html.setAttribute(ModeToggle.COLOR_SCHEME_ATTR, ModeToggle.DARK_MODE);
+          html.classList.add("color-scheme-dark", ModeToggle.DARK_MODE);
+        } else if (mode === ModeToggle.LIGHT_MODE) {
+          html.setAttribute(
+            ModeToggle.COLOR_SCHEME_ATTR,
+            ModeToggle.LIGHT_MODE
+          );
+          html.classList.add("color-scheme-light", ModeToggle.LIGHT_MODE);
+        } else {
+          html.setAttribute(
+            ModeToggle.COLOR_SCHEME_ATTR,
+            ModeToggle.COLOR_SCHEME_AUTO
+          );
+          html.classList.add("color-scheme-auto");
+        }
+      }
+
       get isSysDarkPrefer() {
         return this.sysDarkPrefers.matches;
       }
@@ -107,6 +145,7 @@
           ModeToggle.MODE_ATTR,
           ModeToggle.DARK_MODE
         );
+        this.updateColorScheme(ModeToggle.DARK_MODE);
         sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE);
       }
 
@@ -115,11 +154,13 @@
           ModeToggle.MODE_ATTR,
           ModeToggle.LIGHT_MODE
         );
+        this.updateColorScheme(ModeToggle.LIGHT_MODE);
         sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE);
       }
 
       clearMode() {
         document.documentElement.removeAttribute(ModeToggle.MODE_ATTR);
+        this.updateColorScheme(ModeToggle.COLOR_SCHEME_AUTO);
         sessionStorage.removeItem(ModeToggle.MODE_KEY);
       }
 
