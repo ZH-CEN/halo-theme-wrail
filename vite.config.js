@@ -6,7 +6,7 @@ import path from 'path';
 
 export default defineConfig({
   root: 'src',
-  base: '/themes/halo-theme-chirpy/assets/dist/',
+  base: '/themes/halo-theme-wrail/assets/dist/',
   build: {
     outDir: fileURLToPath(new URL('./templates/assets/dist/', import.meta.url)),
     emptyOutDir: true,

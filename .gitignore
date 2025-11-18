@@ -26,5 +26,5 @@ node_modules
 build
 gradle
 dist/
-/halo-theme-chirpy*.zip
+/halo-theme-wrail*.zip
 /templates/modules/import.html

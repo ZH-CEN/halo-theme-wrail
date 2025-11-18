@@ -41,7 +41,7 @@ spec:
           label: 社交链接
           value:
             - icon: fab fa-github
-              url: https://github.com/airbozh
+              url: https://github.com/ZH-CEN
             - icon: fab fa-twitter
               url: https://twitter.com/
             - icon: fas fa-envelope
