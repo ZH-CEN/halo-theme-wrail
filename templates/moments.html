@@ -51,15 +51,15 @@
         <li
           class="moment-item card card-body border-0 shadow-sm mb-4"
           th:each="moment : ${moments.items}"
-          th:with="content=${moment.spec.content}"
+          th:with="momentSpec=${moment.spec}, content=${momentSpec != null ? momentSpec.content : null}"
         >
           <div
             class="moment-meta d-flex flex-wrap gap-3 small text-muted mb-3"
             th:with="author=${moment.owner}, stats=${moment.stats}"
           >
-            <span th:if="${moment.spec.releaseTime != null}">
+            <span th:if="${momentSpec != null and momentSpec.releaseTime != null}">
               <i class="far fa-clock me-1"></i>
-              [[${#dates.format(moment.spec.releaseTime,'yyyy-MM-dd HH:mm')}]]
+              [[${#dates.format(momentSpec.releaseTime,'yyyy-MM-dd HH:mm')}]]
             </span>
             <span class="d-flex align-items-center" th:if="${author != null}">
               <img
@@ -86,17 +86,18 @@
 
           <div
             class="moment-content mb-3"
-            th:if="${not #strings.isEmpty(content.html)}"
+            th:if="${content != null and not #strings.isEmpty(content.html)}"
             th:utext="${content.html}"
           ></div>
 
           <div
             class="moment-media row g-3"
-            th:if="${not #lists.isEmpty(content.medium)}"
+            th:if="${content != null and not #lists.isEmpty(content.medium)}"
           >
             <th:block th:each="momentItem, iterStat : ${content.medium}">
               <div
                 class="col-12"
+                th:if="${momentItem != null and momentItem.type != null}"
                 th:classappend="${#lists.size(content.medium) > 1 ? ' col-md-6' : ''}"
               >
                 <figure class="moment-media-item mb-0">
@@ -126,11 +127,11 @@
 
           <div
             class="moment-tags mt-3"
-            th:if="${not #lists.isEmpty(moment.spec.tags)}"
+            th:if="${momentSpec != null and not #lists.isEmpty(momentSpec.tags)}"
           >
             <a
               class="badge bg-light text-muted me-2 mb-2 text-decoration-none"
-              th:each="momentTag : ${moment.spec.tags}"
+              th:each="momentTag : ${momentSpec.tags}"
               th:href="@{/moments(tag=${momentTag})}"
             >
               # [[${momentTag}]]
