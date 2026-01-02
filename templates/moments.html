@@ -46,7 +46,7 @@
     <section class="moments-list">
       <ul
         class="list-unstyled moments-timeline"
-        th:unless="${#lists.isEmpty(moments.items)}"
+        th:if="${moments != null and not #lists.isEmpty(moments.items)}"
       >
         <li
           class="moment-item card card-body border-0 shadow-sm mb-4"
@@ -160,7 +160,7 @@
     <nav
       class="moments-pagination mt-4"
       aria-label="Moments Pagination"
-      th:if="${moments.hasPrevious() || moments.hasNext()}"
+      th:if="${moments != null and (moments.hasPrevious() || moments.hasNext())}"
     >
       <ul class="pagination justify-content-center align-items-center gap-2">
         <li
@@ -169,7 +169,7 @@
         >
           <a
             class="page-link"
-            th:if="${moments.hasPrevious()}"
+            th:if="${moments.hasPrevious() and moments.prevUrl != null}"
             th:href="@{${moments.prevUrl}}"
             rel="prev"
           >
@@ -181,7 +181,7 @@
 
         <li class="page-item disabled">
           <span class="page-link bg-transparent border-0 text-muted">
-            第 [[${moments.page}]] / [[${moments.totalPages}]] 页
+            第 [[${moments != null ? moments.page : 0}]] / [[${moments != null ? moments.totalPages : 0}]] 页
           </span>
         </li>
 
@@ -191,7 +191,7 @@
         >
           <a
             class="page-link"
-            th:if="${moments.hasNext()}"
+            th:if="${moments.hasNext() and moments.nextUrl != null}"
             th:href="@{${moments.nextUrl}}"
             rel="next"
           >
