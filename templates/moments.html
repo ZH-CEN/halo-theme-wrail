@@ -48,15 +48,28 @@
       margin-top: 0.75rem;
     }
 
-    .moment-media-grid figure {
-      height: 100%;
+    .moment-media figure {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 0.35rem;
     }
 
-    .moment-media-grid img,
-    .moment-media-grid video,
-    .moment-media-grid audio {
+    .moment-media img,
+    .moment-media video,
+    .moment-media audio {
       width: 100%;
       border-radius: 0.35rem;
+    }
+
+    .moment-media .moment-photo {
+      max-height: 420px;
+      object-fit: contain;
+    }
+
+    .moment-media-grid figure {
+      height: 100%;
     }
 
     .moment-media-grid .moment-photo {
