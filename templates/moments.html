@@ -10,15 +10,66 @@
       gap: 1rem;
     }
 
-    .moment-media-grid figure {
-      height: 100%;
+    .moments-timeline {
+      margin: 0;
+      padding: 0;
     }
 
-    .moment-media-grid img,
-    .moment-media-grid video,
-    .moment-media-grid audio {
+    .moments-timeline .moment-item {
+      padding: 1.25rem;
+    }
+
+    .moments-timeline .moment-item:not(:last-child) {
+      margin-bottom: 1.25rem;
+    }
+
+    .moment-meta {
+      margin-bottom: 0.75rem;
+      row-gap: 0.35rem;
+    }
+
+    .moment-content {
+      margin-bottom: 0.75rem;
+    }
+
+    .moment-content p {
+      margin-bottom: 0.5rem;
+    }
+
+    .moment-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .moment-tags {
+      margin-top: 0.75rem;
+    }
+
+    .moment-footer {
+      margin-top: 0.75rem;
+    }
+
+    .moment-media figure {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 0.35rem;
+    }
+
+    .moment-media img,
+    .moment-media video,
+    .moment-media audio {
       width: 100%;
       border-radius: 0.35rem;
+    }
+
+    .moment-media .moment-photo {
+      max-height: 420px;
+      object-fit: contain;
+    }
+
+    .moment-media-grid figure {
+      height: 100%;
     }
 
     .moment-media-grid .moment-photo {
@@ -72,12 +123,12 @@
         th:if="${moments != null and not #lists.isEmpty(moments.items)}"
       >
         <li
-          class="moment-item card card-body border-0 shadow-sm mb-4"
+          class="moment-item card card-body border-0 shadow-sm"
           th:each="moment : ${moments.items}"
           th:with="momentSpec=${moment.spec}, content=${momentSpec != null ? momentSpec.content : null}"
         >
           <div
-            class="moment-meta d-flex flex-wrap gap-3 small text-muted mb-3"
+            class="moment-meta d-flex flex-wrap gap-3 small text-muted"
             th:with="author=${moment.owner}, stats=${moment.stats}"
           >
             <span th:if="${momentSpec != null and momentSpec.releaseTime != null}">
@@ -108,7 +159,7 @@
           </div>
 
           <div
-            class="moment-content mb-3"
+            class="moment-content"
             th:if="${content != null and not #strings.isEmpty(content.html)}"
             th:utext="${content.html}"
           ></div>
@@ -150,7 +201,7 @@
           </div>
 
           <div
-            class="moment-tags mt-3"
+            class="moment-tags"
             th:if="${momentSpec != null and not #lists.isEmpty(momentSpec.tags)}"
           >
             <a
@@ -162,7 +213,7 @@
             </a>
           </div>
 
-          <div class="moment-footer d-flex justify-content-between align-items-center mt-3">
+          <div class="moment-footer d-flex justify-content-between align-items-center">
             <span
               class="small text-muted"
               th:if="${moment.metadata != null and moment.metadata.creationTimestamp != null}"
